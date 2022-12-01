@@ -233,10 +233,10 @@ def tag_NER_lookup(filepath, lookup_p1, lookup_p2, out_csv):
     outputfile.close()
 
 
-    '''word = open('/mnt/c/Research/Text2EL/MIMIC_Exp/hospital_activity.txt', 'r')
+    '''word = open('./hospital_activity.txt', 'r')
     word = word.read().lower().split("\n")
 
-    word1 = open('/mnt/c/Research/Text2EL/MIMIC_Exp/medical_activity.txt', 'r')
+    word1 = open('./medical_activity.txt', 'r')
     word1 = word1.read().lower().split("\n")
     
     # print(word)
@@ -249,7 +249,7 @@ def tag_NER_lookup(filepath, lookup_p1, lookup_p2, out_csv):
     dicfilepath = filepath
     
     folders =[f for f in listdir(filepath) ]
-    outputfile=open('/mnt/c/Research/Text2EL/MIMIC_Exp/Test/attributes_d1.csv', 'w')
+    outputfile=open('./attributes_d1.csv', 'w')
     for dir in folders:
         #print(dir)
         #print(dicfilepath+'/'+dir)
@@ -269,7 +269,7 @@ def tag_NER_lookup(filepath, lookup_p1, lookup_p2, out_csv):
 
                 svg = displacy.render(doc1, style="dep")
                 file_name = '-'.join([w.text for w in doc if not w.is_punct]) + ".svg"
-                #output_path = Path("/mnt/c/Research/MIMIC_Exp/plot.svg")
+                #output_path = Path("./plot.svg")
                 #output_path.open("w", encoding="utf-8").write(svg)
 
                 for x in doc1.ents:
@@ -402,7 +402,7 @@ def tag_NER_lookup(filepath, lookup_p1, lookup_p2, out_csv):
     messagebox.showinfo("Case attributes extracted")'''
 '''
 def dep_parse(filepath):
-    os.environ["CORENLP_HOME"]='C:\\Users\\kapugama\\Downloads\\stanford-corenlp-latest\\stanford-corenlp-4.4.0'
+    os.environ["CORENLP_HOME"]='./stanford-corenlp-latest/stanford-corenlp-4.4.0'
 
     
     sub_process_table = {"HADM_ID":[], "Entity": [],  "Note":[]}
@@ -482,7 +482,7 @@ def dep_parse(filepath):
 
                             #print(df)
                             df=df.drop_duplicates()
-                            df.to_csv("/mnt/c/Research/MIMIC_Exp/output/dep_par_d.csv")
+                            df.to_csv("./dep_par_d.csv")
 '''
 
 def remove_suffix(input_string, suffix):
@@ -1147,7 +1147,7 @@ def extract_case():
     frame2.place(height=380, width=600)
     tv1=ttk.Treeview(frame2)
     tv1.place(relheight=1, relwidth=1)
-    #jsonfile ='/mnt/c/Research/MIMIC_Exp/output/case_attributes_d.json'
+    #jsonfile ='./case_attributes_d.json'
     csvfile= './case_attr_final_list.csv'
     
     def back():
@@ -1416,9 +1416,9 @@ def time_match(event_log, extracted_events, time_matched_events):
 def semantic_match(time_matched_events, semantic_similairty):
     lemmatizer = WordNetLemmatizer()
 
-    model_path = "/mnt/c/Research/PAH/PAH_experiments/BioSentVec_PubMed_MIMICIII-bigram_d700.bin"
-    #model_path = "/mnt/c/Research/PAH_experiments/RunUbuntu/wiki_bigrams.bin"
-    #model_path = "/mnt/c/Research/PAH_experiments/RunUbuntu/twitter_bigrams.bin"
+    model_path = "./BioSentVec_PubMed_MIMICIII-bigram_d700.bin"
+    #model_path = "./wiki_bigrams.bin"
+    #model_path = "./twitter_bigrams.bin"
     model = sent2vec.Sent2vecModel()
     try:
         model.load_model(model_path)
@@ -1505,8 +1505,8 @@ def calculate_threshold(similarity_csv, recorded_csv, unrecorded_csv):
     
     
 def compare():
-    #time_match('/mnt/c/Research/Text2EL/MIMIC_Exp/Event Log/video_event_log.csv','./final_event_list.csv', './time_matched_events.csv')
-    time_match('/mnt/c/Research/Text2EL/MIMIC_Exp/Event Log/event_log_no_duplicates_wo wierd tables.csv','./final_event_list.csv', './time_matched_events.csv')
+    #time_match('./video_event_log.csv','./final_event_list.csv', './time_matched_events.csv')
+    time_match('./event_log_no_duplicates_wo wierd tables.csv','./final_event_list.csv', './time_matched_events.csv')
     semantic_match('./time_matched_events.csv', './semantic_similairty.csv')
     prepare_attributefor_comparisson()
     messagebox.showinfo(message="Validation is completed")
@@ -1616,7 +1616,7 @@ def update_inconsitent_time():
     da0=pd.read_csv('./recorded_events.csv')
 
     #original event log
-    d1= pd.read_csv('/mnt/c/Research/Text2EL/MIMIC_Exp/Event Log/video_event_log.csv')
+    d1= pd.read_csv('./video_event_log.csv')
     d2=pd.read_csv('./new_events.csv')
     d2=d2[['Case_ID','Extracted_Activity', 'Timestamp',	'Note']]
     d2 = d2.rename(columns={'Note': 'Source', 'Extracted_Activity' : 'Activity'})
@@ -1654,7 +1654,7 @@ def enrich_log():
     tv1.place(relheight=1, relwidth=1)
 
     
-    d0=pd.read_csv('/mnt/c/Research/Text2EL/MIMIC_Exp/Event Log/video_event_log.csv')
+    d0=pd.read_csv('./video_event_log.csv')
   
     d0=d0.rename(columns={ 'HADM_ID':'Case_ID'})
     d0=d0[['Case_ID', 'Activity', 'Timestamp', 'Source']]
@@ -1729,14 +1729,14 @@ def prepare_attributefor_comparisson():
 
     #compare with original MIMIC
     '''
-    d0=pd.read_csv('/mnt/c/Research/TEXT2EL/MIMIC_Exp/Case_list_fil.csv')
+    d0=pd.read_csv('./Case_list_fil.csv')
 
     case_list= d0['HADM_ID'].drop_duplicates().to_list()
-    p1 = pd.read_csv("/mnt/c/Research/mimic-iii-clinical-database-1.4/admissions.csv")
+    p1 = pd.read_csv("./mimic-iii-clinical-database-1.4/admissions.csv")
     p1.dropna(subset=['HADM_ID'], inplace=True)
     d1=p1[p1['HADM_ID'].isin (case_list)]
 
-    p2 = pd.read_csv("/mnt/c//Research/mimic-iii-clinical-database-1.4/patients.csv")
+    p2 = pd.read_csv("./mimic-iii-clinical-database-1.4/patients.csv")
 
     p1 =d1[["SUBJECT_ID","HADM_ID"]]
     p2=p2[["SUBJECT_ID","GENDER",	"DOB"]]
