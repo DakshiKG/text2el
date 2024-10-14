@@ -703,7 +703,7 @@ if __name__ == '__main__':
     apply_regex_rules("extracted_notes_MIMIC-III_Evaluation\\", ".extracted_events.csv")
     extract_specific_notes("extracted_notes_MIMIC-III_Evaluation\\", "specific_events.csv")
     refine_events("extracted_events.csv", "text2el\models\\exclude_list.txt", "text2el\models\\stopwords.txt", "refined_events.csv")
-    get_all_events("refined_events.csv", "Cspecific_events.csv", "all_events.csv")
+    get_all_events("refined_events.csv", "specific_events.csv", "all_events.csv")
     tag_NER_lookup("extracted_notes_MIMIC-III_Evaluation\\", 'lookup_hospital_activity.txt' , 'lookup_medical_activity.txt', 'all_attributes.csv')
     dep_parse_attribute("extracted_notes_MIMIC-III_Evaluation\\", "all_dependency.csv")
     extract_case_attributes("all_dependency.csv", "all_attributes.csv", 'all_events.csv', "case_attr_final.csv")
